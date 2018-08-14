@@ -1,0 +1,71 @@
+{% extends 'AppBundle::layout.html.twig' %}
+{% block title %} | Lettre {{currentLetter|upper}}{% endblock %}
+{% block content %}
+	<div class="container">
+ 		<div class="row">
+  			<div id="content" class="col-xs-12 col-sm-8">
+  
+				{% for entry in list %}
+					<div class="well well-lg">
+    					<h2><a href="{{url('app_dictionary_entry', {'id':entry.id})}}">{{ entry.word|capitalize }}</a></h2>
+    					<p></p>
+    					<p> {{ entry.definition|raw }} </p>
+						<p><cite> {{entry.example|raw }} </cite></p>
+						<p></p>
+						<p>
+							{% if entry.createdAt|date('d/m/y') == entry.updatedAt|date('d/m/y')%}
+								<small>Ajouté par <b>{{entry.author}}</b>, le {{ entry.createdAt|date('d/m/y')}}</small>
+							{% else %}
+								<small>Ajouté par <b>{{entry.author}}</b>, modifié le {{ entry.updatedAt|date('d/m/y')}}</small>
+							{% endif %}
+						</p>
+						<div class="row">		
+						  	<div class="col-xs-4">
+								<div class="card-action-pellet btn-toolbar" role="toolbar">
+									<div class="btn-group" role="group" aria-label="Vote">
+									  	<a class="btn btn-default voting" id="up-{{entry.id}}">
+									  		<span id="count-vote-up-entry-{{entry.id}}">{{ entry.voteUps|length|default("0")}}</span>
+									  		<i class="fa fa-thumbs-up" aria-hidden="true"></i>
+									  	</a> 
+									  	<a class="btn btn-default voting" id="down-{{entry.id}}">
+									  		<span id="count-vote-down-entry-{{entry.id}}">{{ entry.voteDowns|length|default("0")}}</span>
+									  		<i class="fa fa-thumbs-down" aria-hidden="true"></i>
+									  	</a>
+									</div>
+								</div>
+						  	</div>
+						  	<div class="col-xs-8">
+						       	<div class="card-action-pellet btn-toolbar pull-right" role="toolbar">
+						       		<div class="btn-group" role="group" aria-label="Partage">
+						       			<!-- AddToAny BEGIN -->
+										<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+											{# <a class="a2a_dd" href="https://www.addtoany.com/share"></a> #}
+											<a class="a2a_button_facebook"></a>
+											<a class="a2a_button_twitter"></a>
+											<a class="a2a_button_google_plus"></a>
+											<a class="a2a_button_linkedin"></a>
+										</div>
+										<script>
+											var a2a_config = a2a_config || {};
+											a2a_config.linkname = "{{entry.word}}";
+											a2a_config.linkurl = "{{url('app_dictionary_entry', {'id':entry.id})}}";
+											a2a_config.locale = "fr";
+										</script>
+										<script async src="https://static.addtoany.com/menu/page.js"></script>
+										<!-- AddToAny END -->
+						       			
+									</div>
+							   	</div>
+						  	</div>
+						</div>{# /.jumbotron > row #}
+					</div>
+				{% endfor %}
+				<div class="navigation text-center">
+	    			{{ knp_pagination_render(list) }}
+				</div>
+  
+  			</div>
+  			
+ 		</div>
+	</div>
+{% endblock %}

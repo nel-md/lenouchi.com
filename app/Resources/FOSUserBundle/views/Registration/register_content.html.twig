@@ -1,0 +1,43 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="container" style="margin-top:5em">
+	<div class="col-md-6 col-md-offset-3  well well-lg">
+		<div class="row text-center">
+			<h3><b>Inscrivez-vous</b></h3>
+			<hr>
+		</div>
+		<div class="row">
+   			<div class="col-xs-12 text-center">
+    			<div class="control-group form-group" id="form_group">
+    				{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+    				<div class="text-left" style="margin-bottom:15px">
+					    {{ form_label(form.email) }}
+					    {{ form_errors(form.email) }}
+					    {{ form_widget(form.email, { 'attr': {'id':'email', 'class': 'form-control', 'placeholder': 'Adresse E-mail', 'required': 'required', 'data-validation-required-message':'Veuillez renseigner votre adresse e-mail'} }) }}
+					</div>
+					<div class="text-left" style="margin-bottom:15px">
+					    {{ form_label(form.username) }}
+					    {{ form_errors(form.username) }}
+					    {{ form_widget(form.username, { 'attr': {'class': 'form-control', 'placeholder': 'Nom d\'utilisateur', 'required': 'required', 'data-validation-required-message':'Veuillez renseigner votre nom d\'utilisateur'} }) }}
+					</div>
+
+					<div class="text-left" style="margin-bottom:15px">
+					    {{ form_label(form.plainPassword['first']) }}
+					    {{ form_errors(form.plainPassword['first']) }}
+					    {{ form_widget(form.plainPassword['first'], { 'attr': {'class': 'form-control', 'placeholder': 'Mot de passe', 'required': 'required', 'data-validation-required-message':'Veuillez renseigner votre mot de passe'} }) }}
+					</div>
+					<div class="text-left" style="margin-bottom:15px">
+					    {{ form_label(form.plainPassword['second']) }}
+					    {{ form_errors(form.plainPassword['second']) }}
+					    {{ form_widget(form.plainPassword['second'], { 'attr': {'class': 'form-control', 'placeholder': 'Confirmer votre mot de passe', 'required': 'required', 'data-validation-required-message':'Veuillez confirmer votre mot de passe'} }) }}
+					</div>
+					{{ form_widget(form) }}
+     				<div class="text-center">
+        				<input class="btn btn-primary" type="submit" value="{{ 'registration.submit'|trans }}" />
+     				</div>
+					{{ form_end(form) }}
+   				</div>
+   			</div>
+  		</div>
+ 	</div>
+</div>

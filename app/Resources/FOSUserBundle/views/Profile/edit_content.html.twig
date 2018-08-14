@@ -1,0 +1,37 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="container" style="margin-top:15px">
+ 	<div class="row">
+  		<div class="col-md-8 col-md-offset-2 col-xs-12">
+  			<h3>Modifier votre profil</h3>
+			<hr>
+   			<div class="well well-lg">
+				<div class="control-group form-group">
+					{{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+
+					<div class="text-left" style="margin-bottom:15px">
+					    {{ form_label(form.email) }}
+					    {{ form_errors(form.email) }}
+					    {{ form_widget(form.email, { 'attr': {'class': 'form-control', 'placeholder': 'Adresse E-mail', 'required': 'required', 'data-validation-required-message':'Veuillez renseigner votre adresse e-mail'} }) }}
+					</div>
+					<div class="text-left" style="margin-bottom:15px">
+					    {{ form_label(form.username) }}
+					    {{ form_errors(form.username) }}
+					    {{ form_widget(form.username, { 'attr': {'class': 'form-control', 'placeholder': 'Nom d\'utilisateur', 'required': 'required', 'data-validation-required-message':'Veuillez renseigner votre nom d\'utilisateur'} }) }}
+					</div>
+					<div class="text-left" style="margin-bottom:15px">
+					    {{ form_label(form.current_password) }}
+					    {{ form_errors(form.current_password) }}
+					    {{ form_widget(form.current_password, { 'attr': {'class': 'form-control', 'placeholder': 'Mot de passe', 'required': 'required', 'data-validation-required-message':'Mot de passe'} }) }}
+					</div>
+					{{ form_widget(form) }}
+					<div class="text-center">
+						<a href="{{url('fos_user_profile_show')}}" class="btn btn-default">Retour</a>
+						<input class="btn btn-primary" type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+					</div>
+					{{ form_end(form) }}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

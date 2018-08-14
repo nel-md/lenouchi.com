@@ -1,0 +1,22 @@
+{% extends "::base_fos_user.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+	<div class="container" style="margin-top:10em;">
+		<div class="col-md-6 col-md-offset-3">
+			<div class="row text-center">
+				<p class="text-center"><i class="fa fa-check-circle fa-5x" aria-hidden="true"></i></p>
+				<p class="text-center">{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
+				<p class="text-center">
+				    {% if targetUrl != app.request.uri %}
+				    	<a href="{{ targetUrl }}" id="target_url" class="btn btn-secondary">{{ 'registration.back'|trans }}</a>
+				    {% else %}
+				    	<a href="{{ url('app_homepage') }}" id="target_url" class="btn btn-secondary">Aller à la page d'accueil</a>
+				    {% endif %}
+				</p>
+			</div>
+		    
+		</div>
+	</div>
+{% endblock fos_user_content %}

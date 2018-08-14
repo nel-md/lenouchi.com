@@ -1,0 +1,9 @@
+{% if list is not empty %}
+	<br>
+	<h3 class="text-center">Autres mots nouchi de même lettre</h3>
+	<div class="well well-lg">
+		{% for entry in list %}
+			<a href="{{url('app_dictionary_entry', {'id':entry.id})}}" style="padding-right:1em">{{ entry.word|capitalize }}</a>
+		{% endfor %}
+	</div>
+{% endif %}

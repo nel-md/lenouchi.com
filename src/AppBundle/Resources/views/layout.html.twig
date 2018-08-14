@@ -1,0 +1,118 @@
+{% extends '::base.html.twig' %}
+{% block search %}
+	<div class="search-form">
+	   	<div class="container">
+	    	<div class="row">
+		 		<div class="col-md-10 col-md-offset-1">
+		  			<form class="navbar-form text-center" method="get" action="{{ path('app_search') }}">
+		   				<input title="Entrez le mot que vous recherchez" placeholder="Rechercher un mot nouchi" class="form-control form-text" id="edit-search-block-form--2" name="search" value="" size="15" maxlength="128" type="text">
+		  			</form>
+		 		</div>
+			</div>
+			<div class="row">
+			 	<div class="col-md-10 col-md-offset-1">
+	          		<ul class="nav nav-pills" style="margin-bottom:5px;">
+	            		{% for letter in "A".."Z" %}
+	              			<li class="nav-item {% if currentLetter is defined and letter == currentLetter %}active{% endif %}">
+	                			<a class="nav-link" href="{{path('app_dictionary_list_by_letter', {'letter': letter})}}" name="{{letter|lower}}">{{letter}}</a>
+	              			</li>
+	            		{% endfor %}
+	            
+				       {#<li class="nav-item">
+			              	<a class="nav-link" href="#">#</a>
+			            </li>#}
+	          		</ul>
+			  	</div>
+			</div>
+	   	</div>
+	</div>
+{% endblock %}
+{% block asideright %}
+	<div class="section sdbr-top">
+	  	<div class="well well-lg">
+	  		{# <img src="{{asset('sidebar.gif')}}" width="100%"> #}
+	  		{# <br> #}
+	  		<blockquote class="blockquote">
+			  	<p class="mb-0">La définition fait connaître ce qu’est la chose.</p>
+			  	<footer class="blockquote-footer">Aristote, <cite title="Source Title">Organon</cite></footer>
+			</blockquote>
+			<p>
+				<a href="{{ path('app_user_dictionary_add') }}" class="btn btn-primary btn-block"><i class="fa fa-plus" aria-hidden="true"></i>  Ajouter une définition</a>
+			</p>
+	  	</div>
+	</div>
+	{{ render(controller("AppBundle:Helper:topVoteUps", {'max' : 10}))}}
+	{# <div class="col-xs-12" style="padding-left: 5em;">
+		<div class="a2a_kit a2a_kit_size_32 a2a_default_style a2a_follow">
+		    <a class="a2a_button_twitter" data-a2a-follow="Lenouchi" target="blank"></a>
+		    <a class="a2a_button_facebook" data-a2a-follow="Lenouchi" target="blank"></a>
+		    <a class="a2a_button_google_plus" data-a2a-follow="Lenouchi" target="blank"></a>
+		    <a class="a2a_button_linkedin" data-a2a-follow="Lenouchi" target="blank"></a>
+		</div>
+		<script async src="https://static.addtoany.com/menu/page.js"></script>
+	</div>
+
+	<div class="section sdbr-ftr text-center col-xs-12" style="margin-top:15px">
+	  	<p>© 
+	  		{% if "now"|date("Y") > 2017 %}
+	  			2017 - {{ "now"|date("Y")}}
+	  		{% else %}
+	  			2017
+	  		{% endif %}
+	  		Le Nouchi
+	  		<br>Dictionnaire Urbain Ivoirien
+	  	</p>
+	  	<p>
+	  		<a href="#">A propos</a>
+	  		<a href="#">Publicités</a>
+	  		<a href="#">Aide</a>
+	  		<a href="#">entryes de service</a>
+	  		<a href="#">Confidentialité</a>
+	  	</p>
+	  	
+	</div> #}
+{% endblock %}
+{% block javascripts %}
+	{{ parent()}}
+	<script type="text/javascript">
+
+		$('.voting').click(function(e){
+			e.preventDefault();
+
+			var attrId = $(this).attr('id');
+			var parts = attrId.split('-');
+			var data = {type:parts[0], entry_id:parts[1]};
+
+			$.post('/voter', data, function(response){
+
+				if(response.status == 1 && response.is_updated == 1){
+
+					var countUp = parseInt($("#count-vote-up-entry-" + parts[1]).html());
+					var countDown = parseInt($("#count-vote-down-entry-" + parts[1]).html());
+
+					if(parts[0] == 'up'){
+
+						countUp++;
+
+						if(countDown > 0){
+							countDown--;
+						}
+					}else{
+
+						if(countUp > 0){
+							countUp--;
+						}
+						countDown++;
+					}
+
+
+					$("#count-vote-up-entry-" + parts[1]).html(countUp);
+					$("#count-vote-down-entry-" + parts[1]).html(countDown);
+
+				}
+			});
+
+		});
+
+	</script>
+{% endblock %}

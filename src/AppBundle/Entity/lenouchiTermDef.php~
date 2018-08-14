@@ -1,0 +1,165 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Entity\User;
+
+/**
+ * lenouchiTermDef
+ *
+ * @ORM\Table(name="lenouchi_term_def")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\lenouchiTermDefRepository")
+ */
+class lenouchiTermDef
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lenouchiTerm", type="string", length=100)
+     */
+    private $lenouchiTerm;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lenouchiDef", type="string", length=255)
+     */
+    private $lenouchiDef;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lenouchiEx", type="text")
+     */
+    private $lenouchiEx;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="lenouchiDateajout", type="datetime")
+     */
+    private $lenouchiDateajout;
+	
+	/**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="terms")
+	 * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $auteur;
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set lenouchiTerm
+     *
+     * @param string $lenouchiTerm
+     *
+     * @return lenouchiTermDef
+     */
+    public function setLenouchiTerm($lenouchiTerm)
+    {
+        $this->lenouchiTerm = $lenouchiTerm;
+
+        return $this;
+    }
+
+    /**
+     * Get lenouchiTerm
+     *
+     * @return string
+     */
+    public function getLenouchiTerm()
+    {
+        return $this->lenouchiTerm;
+    }
+
+    /**
+     * Set lenouchiDef
+     *
+     * @param string $lenouchiDef
+     *
+     * @return lenouchiTermDef
+     */
+    public function setLenouchiDef($lenouchiDef)
+    {
+        $this->lenouchiDef = $lenouchiDef;
+
+        return $this;
+    }
+
+    /**
+     * Get lenouchiDef
+     *
+     * @return string
+     */
+    public function getLenouchiDef()
+    {
+        return $this->lenouchiDef;
+    }
+
+    /**
+     * Set lenouchiEx
+     *
+     * @param string $lenouchiEx
+     *
+     * @return lenouchiTermDef
+     */
+    public function setLenouchiEx($lenouchiEx)
+    {
+        $this->lenouchiEx = $lenouchiEx;
+
+        return $this;
+    }
+
+    /**
+     * Get lenouchiEx
+     *
+     * @return string
+     */
+    public function getLenouchiEx()
+    {
+        return $this->lenouchiEx;
+    }
+
+    /**
+     * Set lenouchiDateajout
+     *
+     * @param \DateTime $lenouchiDateajout
+     *
+     * @return lenouchiTermDef
+     */
+    public function setLenouchiDateajout($lenouchiDateajout)
+    {
+        $this->lenouchiDateajout = $lenouchiDateajout;
+
+        return $this;
+    }
+
+    /**
+     * Get lenouchiDateajout
+     *
+     * @return \DateTime
+     */
+    public function getLenouchiDateajout()
+    {
+        return $this->lenouchiDateajout;
+    }
+}
+

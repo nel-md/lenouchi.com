@@ -1,0 +1,139 @@
+/**
+*
+* LE NOUCHI Custom Css
+*
+**/
+/**** Global ****/
+body{font-family:'Roboto', sans-serif; background-color: #ebebeb;}
+
+/**** Navbar ****/
+.navbar-default{background:#222533;text-transform:uppercase;}
+.navbar-default .navbar-brand{font-family:'Luckiest Guy', cursive;color:#faf100;font-size:22px;text-transform: capitalize;padding: 7px;margin-bottom: 5px;}
+.navbar-default .navbar-nav>li>a{color:#fff;font-size:12px;font-weight:bold;text-shadow:none;border:1px solid #7a7a7a;padding:6px 10px;margin:9px 5px;/*border-bottom: 3px solid #7a7a7a;*/}
+.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus{color:#fff;border:1px solid #7a7a7a;/*border-bottom: 2px solid #7a7a7a;*/}
+
+.navbar-default .navbar-form{border-color:;}
+
+.dropdown-menu > li > a {color: /*#999999*/#636161;font-size: 12px;}
+
+
+/****** Search section ******/
+.search-form{
+font-family: 'Lato', sans-serif;
+width:auto;
+max-width:100%;
+background-color: #222533;
+margin-bottom:10px;
+}
+.input-group .form-control:first-child {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.search-form input[type="text"] {
+	font-size: 20px;
+	font-weight:100;
+	outline: 0;
+	height: 45px;
+	margin: 7px 0 7px 0;
+	width: 90%;
+}
+
+.input-group .input-group-btn{display:none;}
+
+.nav-pills > li > a {
+    border-radius: 4px;
+	padding: 6px 9px;
+	font-family:lato;
+	font-weight:600;
+	color: #faf100;
+}
+.nav-pills > li > a:hover {
+    color: #2f4f4f;
+	background-color: #fff;
+}
+.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus {
+    color: #2f4f4f;
+    background-color:#fff /*#158cba*/;
+}
+
+.search-form > .nav{margin-bottom:5px;}
+/*.container .row > .nav-pills{
+	text-align:center;
+}*/
+
+
+.form-control{
+    height: 45px;
+    padding: 7px 12px;
+    font-size: 14px;
+    color: #333;
+}
+
+#content{
+	min-height: 500px;
+}
+
+/****** Inner Section ******/
+.well-lg{border-radius: 5px;}
+/****** Content section ******/
+#content .well{background-color:#fff;-webkit-box-shadow:0px 3px 5px 1px #dcdcdc;box-shadow:0px 3px 5px 1px #dcdcdc;}
+/*#content .well h2 a{font-family: 'lato';}*/
+#content .well h2 a:hover, #content .well h2 a:focus{text-decoration:underline;}
+/****** Sidebar section ******/
+#sidebar .well{background-color:#fff;-webkit-box-shadow:0px 3px 5px 1px #dcdcdc;box-shadow:0px 3px 5px 1px #dcdcdc;}
+
+/****** Pagination section ******/
+.pagination>li>a, .pagination>li>span {
+    background-color: #fff;
+    margin-left: -1px;
+}
+
+/****** Footer section ******/
+footer{padding:1em;background-color:#fff;text-align:center;}
+footer .copyright{font-size:11px;}
+footer .quicklinks .list-inline li a{font-size:12px;color:#ea5117;}
+footer .quicklinks .list-inline li a:hover, footer .quicklinks .list-inline li a:focus{text-decoration:underline;}
+footer ul .list-inline li a .fa{font-size:20px;color:#ea5117;}
+
+/* MEDIA QUERIES FOR A RESPONSIVE LAYOUT */
+
+@media (max-width: 500px){
+        
+		.search-form{
+			
+		}
+		.search-form input[type=text]
+		{
+			/*font-family: 'Calibri', sans-serif;*/
+			font-size: 16px;
+			outline: 0;
+			border: 0;
+			width: 100%;
+			border-radius: 4px;
+			color: #000c0c;
+		}
+
+}
+@media (min-width: 500px) and (max-width: 767px){
+        
+		.search-form{
+			
+		}
+		.search-form input[type=text]
+		{
+			/*font-family: 'Calibri', sans-serif;*/
+			font-size: 18px;
+			outline: 0;
+			border: 0;
+			width: 100%;
+			border-radius: 4px;
+			color: #000c0c;
+		}
+
+}
+
+
+@media (min-width: 1200px){
+	.container{width:960px;}
+}

@@ -1,0 +1,36 @@
+{% extends 'AppBundle::layout.html.twig' %}
+{% block title %} | Contactez-nous{% endblock %}
+
+{% block container %}
+	<div class="container">
+		<div class="row">
+			<div id="content" class="col-xs-8 col-xs-offset-2">
+				<h3>Laissez votre message</h3>
+				<hr/>
+				{{ form_start(form) }}
+				{{ form_errors(form) }}
+				 <div class="control-group">
+			      <div class="controls">
+				   <label>Adresse email:</label>
+				   {{ form_widget(form.author, {'attr':{'value':app.user}}) }}
+				  </div>
+				 </div>
+				 <div class="control-group">
+			      <div class="controls" style="margin-bottom:20px;">
+				   <label>Sujet:</label>
+				   {{ form_widget(form.subject) }}
+				  </div>
+				 </div>
+				 <div class="control-group">
+			      <div class="controls" style="margin-bottom:20px;">
+				   <label>Message:</label>
+				   {{ form_widget(form.message) }}
+				  </div>
+				 </div>
+				{{ form_widget(form.submit) }}
+				{{ form_end(form) }}
+							
+			 </div>
+		</div>
+	</div>
+{% endblock %}

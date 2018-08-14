@@ -1,0 +1,9 @@
+{% if list is not empty %}
+	<div class="well well-lg">
+		<h4>Les flops mots nouchi</h4>
+		<hr>
+		{% for entry in list %}
+			<h5><a href="{{url('app_dictionary_entry', {'id':entry.id})}}">{{ entry.word }}</a></h5>
+		{% endfor %}
+	</div>
+{% endif %}

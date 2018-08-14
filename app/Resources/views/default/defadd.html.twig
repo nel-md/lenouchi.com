@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+{% block title %} | Ajouter une définition{% endblock %}
+{% block body %}
+<div class="container">
+ <div class="row">
+  <div id="content" class="col-xs-8 col-xs-offset-2">
+	<h3 class="text-center">Ajouter votre définition</h3>
+
+		{{ form_start(form) }}
+		{{ form_errors(form) }}
+		 <div class="control-group">
+	      <div class="controls">
+		   <label>Mot:</label>
+		   {{ form_widget(form.lenouchi_term) }}
+		  </div>
+		 </div>
+		 <div class="control-group">
+	      <div class="controls">
+		   <label>Definition:</label>
+		   {{ form_widget(form.lenouchi_def) }}
+		  </div>
+		 </div>
+		 <div class="control-group">
+	      <div class="controls" style="margin-bottom:20px;">
+		   <label>Exemple:</label>
+		   {{ form_widget(form.lenouchi_ex) }}
+		  </div>
+		 </div>
+		{{ form_widget(form.ajouter) }}
+		{{ form_end(form) }}
+				
+  </div>
+ </div>
+</div>
+{% endblock %}

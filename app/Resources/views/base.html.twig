@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+			<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120089621-1"></script>
+			<script>
+			  window.dataLayer = window.dataLayer || [];
+			  function gtag(){dataLayer.push(arguments);}
+			  gtag('js', new Date());
+
+			  gtag('config', 'UA-120089621-1');
+			</script>
+		<!-- End  Google Analytics -->
+	
+		{% block meta %}
+			<meta charset="utf-8">
+		    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+		    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		    <meta name="description" content="lenouchi.com: dictionnaire urbain ivoirien; dictionnaire participatif de mots nouchi; apporte ta contribution, ajoute ta définition.">
+		    <meta name="author" content="ORDEM Digital">
+		{% endblock %}
+	    <title>Le Nouchi{% block title %}{% endblock %}</title>
+		{% block stylesheets %}
+			<link rel="stylesheet" href="{{ asset('dist/css/style.min.css') }}" />
+			<link rel="stylesheet" href="{{ asset('dist/css/custom.css') }}" />
+			<link rel="stylesheet" href="{{ asset('libs/font-awesome/css/font-awesome.min.css') }}" />
+            <link href="https://fonts.googleapis.com/css?family=Lato|Roboto|Swanky+and+Moo+Moo" rel="stylesheet">
+		{% endblock %}
+		<link rel="icon" type="image/x-icon" href="{{ asset('favicon.png') }}" />
+	</head>
+	<body>
+
+		{% block header %}
+			{% block navbar %}
+				<nav class="navbar navbar-default navbar-static-top">
+			      <div class="container">
+				        <div class="navbar-header">
+					        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					        	<span class="sr-only">Toggle navigation</span>
+					            <span class="icon-bar"></span>
+					            <span class="icon-bar"></span>
+					            <span class="icon-bar"></span>
+					        </button>
+					        <a class="navbar-brand" href="{{ path('app_homepage') }}">LE Nouchi </br><span style="font-family: 'Swanky and Moo Moo', cursive;font-size:18px;font-weight:100;color:#fff;text-transform:capitalize;">Dictionnaire Urbain Ivoirien</span></a>
+				        </div>
+				        <div id="navbar" class="collapse navbar-collapse navbar-right">
+				          	<ul class="nav navbar-nav nav-pills">
+				            	<li>
+				            		<a href="{{ path('app_user_dictionary_add') }}"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter une définition</a>
+				            	</li>
+								<li class="dropdown">
+									{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+											{{ app.user.username }}<span class="caret"></span>
+										</a>
+										<ul class="dropdown-menu">
+											<li>
+												<a href="{{ path('fos_user_profile_show') }}">
+													<i class="fa fa-user" aria-hidden="true"></i> Mon compte
+							                	</a>
+							            	</li>
+							                <li>
+							                	<a href="{{ path('app_user_dictionary_list') }}">
+													<i class="fa fa-list" aria-hidden="true"></i> Ma liste
+								                </a>
+							            	</li>
+											<li>
+												<a href="{{ path('fos_user_security_logout') }}">
+													<i class="fa fa-sign-out" aria-hidden="true"></i> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+							                	</a>
+							                </li>
+										</ul>	
+				            		{% else %}
+										<a href="{{ path('fos_user_security_login') }}">
+											<i class="fa fa-sign-in" aria-hidden="true"></i> Connexion
+										</a>
+									{% endif %}
+								</li>
+							
+						  	</ul>
+				        </div><!--/.nav-collapse -->
+			      	</div>
+				</nav><!--/.navbar -->
+			{% endblock %}
+			
+			{% block search %}{% endblock %}
+
+		{% endblock %}
+
+		{% if app.request.hasPreviousSession %}
+	        {% for type, messages in app.session.flashbag.all() %}
+	            {% for key,message in messages %}
+	                
+	                <div class="alert alert-{{key}} alert-dismissible show text-center" role="alert">
+	                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+	                        <span aria-hidden="true">&times;</span>
+	                    </button>
+	                    {{ message|raw }}
+	                </div>
+	               
+	            {% endfor %}
+	        {% endfor %}
+	    {% endif %}
+
+		{% block container %}
+
+			<div class="container">
+	 			<div class="row">
+					{% block asideleft %}{% endblock %}
+
+					<div id="content" class="col-xs-12 col-sm-8">
+						{% block content %}{% endblock %}
+					</div>
+					<div id="sidebar" class="col-xs-12 col-sm-4 hidden-sm hidden-xs">
+						{% block asideright %}{% endblock %}
+					</div>
+				</div>
+			</div>
+
+		{% endblock %}
+
+		{% block footer %}
+			<footer>
+				<div class="container">
+					<div class="row">
+						<div class="col-md-4">
+							<span class="copyright">©
+				  		{% if "now"|date("Y") > 2017 %}
+				  			2017 - {{ "now"|date("Y")}}
+				  		{% else %}
+				  			2017
+				  		{% endif %}
+				  		Lenouchi, <br>Dictionnaire Urbain Ivoirien
+				  		</span>
+						</div>
+						<div class="col-md-4">
+							<ul class="list-inline social-buttons">
+							  <li class="list-inline-item">
+								<a href="https://www.facebook.com/lenouchicom/" target="blank">
+								  <i class="fa fa-facebook"></i>
+								</a>
+							  </li>
+							</ul>
+          				</div>
+						<div class="col-md-4 quicklinks">
+							<ul class="list-inline">
+								<li><a href="{{ path('app_about_us') }}">A propos</a></li>
+								<!-- <li><a href="#" class="btn btn-secondary">Publicités</a></li> -->
+								<!-- <li><a href="{{ path('app_cgu') }}" class="btn btn-secondary">CGU</a></li> -->
+								<li class="footer-menu-divider">⋅</li>
+								<li><a href="{{ path('app_contacts') }}">Contacts</a></li>
+								<li class="footer-menu-divider">⋅</li>
+								<li><a href="{{ path('app_faq') }}">FAQ</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</footer>
+		{% endblock %}
+
+	    {% block javascripts %}
+		    <script src="{{ asset('dist/js/jquery.min.js') }}"></script>
+		    <script src="{{ asset('dist/js/bootstrap.min.js') }}"></script>
+			<script src="{{ asset('dist/js/jqBootstrapValidation.js') }}"></script>
+		{% endblock %}
+	</body>
+</html>

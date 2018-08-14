@@ -1,0 +1,66 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="container" style="margin-top:15px">
+ 	<div class="row">
+  		<div class="col-md-8 col-md-offset-2 col-xs-12">
+  			<h3>Mon compte</h3>
+  			<hr>
+   			<div class="well well-lg">
+   				{# <div class="input-group">
+				  	<span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-user"></i></span>
+				  	<input type="text" class="form-control" placeholder="Nom et Prénoms" disabled="disabled" aria-describedby="basic-addon1">
+				</div>
+				<br> #}
+				<div class="input-group">
+				  	<span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-envelope"></i></span>
+				  	<input type="text" class="form-control" placeholder="Adresse E-mail" disabled="disabled" aria-describedby="basic-addon1" value="{{ user.email }}">
+				</div>
+				<br>
+				<div class="input-group">
+				  	<span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-lock"></i></span>
+				  	<input type="text" class="form-control" placeholder="Nom d'utilisateur" disabled="disabled" aria-describedby="basic-addon1" value="{{ user.username }}">
+				</div>
+   				<br>
+    			<div class="fos_user_user_show text-right">
+				    <p><a href="{{url('fos_user_profile_edit')}}">Modifier mes infos</a></p>
+				    <p><a href="{{url('fos_user_change_password')}}">Modifier mon mot de passe</a></p>
+				</div>
+	
+   			</div>
+  		</div>
+
+  		{# <div class="col-md-7">
+  			<h3>Ma liste</h3>
+  			<hr/>
+			<div class="well well-lg">
+				<table class="table table-responsive">
+				  	<thead class="thead-default">
+				    	<tr>
+				      		<th>#</th>
+					      	<th class="text-left">Mot</th>
+					      	<th class="text-right">Vote Up</th>
+					      	<th class="text-right">Vote Down</th>
+					      	<th></th>
+				    	</tr>
+				  	</thead>
+
+				  	<tbody>
+				  	{% for term in user.terms %}
+				  		<tr>
+					    	<th scope="row">{{ term.id }}</th>
+					      	<td class="text-left"><a href="">{{ term.lenouchiTerm }}</a></td>
+					      	<td class="text-right">10</td>
+					      	<td class="text-right">1</td>
+					      	<th class="text-right">
+					      		<a href="{{url('modifier_definition', {'id': term.id})}}" title="Modifier" alt="Modifier"><i class="glyphicon glyphicon-edit"></i></a>
+					      		<a href="" title="Supprimer" alt="Supprimer"><i class="glyphicon glyphicon-remove"></i></a>
+					      	</th>
+					    </tr>
+					{% endfor %}
+				    	
+				  	</tbody>
+				</table>
+			</div>
+  		</div> #}
+ 	</div>
+</div>

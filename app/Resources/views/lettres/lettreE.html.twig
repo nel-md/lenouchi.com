@@ -1,0 +1,157 @@
+{% extends 'base.html.twig' %}
+{% block title %} | E{% endblock %}
+{% block body %}
+<div class="search-form">
+	   <div class="container">
+	    <div class="row">
+		 <div class="col-md-10 col-md-offset-1">
+		  <form class="navbar-form text-center" method="get" action="{{ path('terme_recherche') }}">
+		   <input title="Entrez le mot que vous recherchez" placeholder="Rechercher un mot nouchi" class="form-control form-text" id="edit-search-block-form--2" name="terme" value="" size="15" maxlength="128" type="text">
+		  </form>
+		 </div>
+		</div>
+		<div class="row">
+		 <div class="col-md-10 col-md-offset-1">
+          <ul class="nav nav-pills" style="margin-bottom:5px;">
+            <li class="nav-item">
+              <a class="nav-link" href="{{path('lettreA')}}" name="a">A</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{path('lettreB')}}">B</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{path('lettreC')}}">C</a>
+            </li>
+			<li class="nav-item">
+              <a class="nav-link" href="{{path('lettreD')}}">D</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{{path('lettreE')}}">E</a>
+            </li>
+			<li class="nav-item">
+              <a class="nav-link" href="{{path('lettreF')}}">F</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{path('lettreG')}}">G</a>
+            </li>
+			<li class="nav-item">
+              <a class="nav-link" href="{{path('lettreH')}}">H</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{path('lettreI')}}">I</a>
+            </li>
+			<li class="nav-item">
+              <a class="nav-link" href="{{path('lettreJ')}}">J</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{path('lettreK')}}" name="k">K</a>
+            </li>
+			<li class="nav-item">
+              <a class="nav-link" href="{{path('lettreL')}}">L</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{path('lettreM')}}">M</a>
+            </li>
+			<li class="nav-item">
+              <a class="nav-link" href="{{path('lettreN')}}">N</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{path('lettreO')}}">O</a>
+            </li>
+			<li class="nav-item">
+              <a class="nav-link" href="{{path('lettreP')}}">P</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{path('lettreQ')}}">Q</a>
+            </li>
+			<li class="nav-item">
+              <a class="nav-link" href="{{path('lettreR')}}">R</a>
+            </li>
+			<li class="nav-item">
+              <a class="nav-link" href="{{path('lettreS')}}">S</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{path('lettreT')}}">T</a>
+            </li>
+			<li class="nav-item">
+              <a class="nav-link" href="{{path('lettreU')}}">U</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{path('lettreV')}}">V</a>
+            </li>
+			<li class="nav-item">
+              <a class="nav-link" href="{{path('lettreW')}}">W</a>
+            </li>
+			<li class="nav-item">
+              <a class="nav-link" href="{{path('lettreX')}}">X</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{path('lettreY')}}">Y</a>
+            </li>
+			<li class="nav-item">
+              <a class="nav-link" href="{{path('lettreZ')}}">Z</a>
+            </li>
+			{#<li class="nav-item">
+              <a class="nav-link" href="#">#</a>
+            </li>#}
+          </ul>
+		  </div>
+		</div>
+	   </div>
+	  </div>
+
+<div class="container">
+ <div class="row">
+  <div id="content" class="col-xs-12 col-sm-8">
+  
+	{% for term in showLettre %}
+	<div class="well well-lg">
+    <h2><a><mark> {{ term.lenouchiTerm }} </mark></a></h2>
+    <p> {{ term.lenouchiDef }} </p>
+	<footer><cite> LOrem ipsum dolor sit amet. </cite></footer>
+	<p></p>
+	<p><h5><strong>Ajouté par <a>El-Loko</a>, le 15/07/2017</strong></h5></p>
+	 <div class="row">		
+	  <div class="col-xs-6">
+		<div class="card-action-pellet btn-toolbar" role="toolbar">
+			
+			<div class="btn-group fa fa-map-marker">left two</div>
+			<div class="btn-group fa fa-magic">left facebook</div>
+			<div class="btn-group fa fa-photo">left twitter</div>
+		</div>
+	  </div>
+	  <div class="col-xs-6">
+       <div class="card-action-pellet btn-toolbar pull-right" role="toolbar">
+			
+			<div class="btn-group fa fa-map-marker">right two</div>
+			<div class="btn-group fa fa-magic">facebook</div>
+			<div class="btn-group fa fa-photo">twitter</div>
+	   </div>
+	  </div>
+	 </div>{# /.jumbotron > row #}
+	</div>
+	{% endfor %}
+	
+	<div class="navigation text-center">{#---- display pagination controler ----#}
+    {{ knp_pagination_render(showLettre) }}
+	</div>{#---- /.display pagination controler ----#}
+	
+  </div>
+  <div id="sidebar" class="col-xs-12 col-sm-4">
+   
+	<div class="section sdbr-top">
+	  <div class="well well-lg">
+	   <p>Le Nouchi</p>
+	   <p>Dictionnaire Urbain Ivoirien</p>
+	  </div>
+	 </div>
+	 <div class="section sdbr-ftr text-center">
+	  <p>A propos</p>
+	  <p>© 2017 - Le Nouchi</p>
+	  <p>Dictionnaire Urbain Ivoirien</p>
+	 </div>
+  
+  </div>
+ </div>
+</div>
+{% endblock %}

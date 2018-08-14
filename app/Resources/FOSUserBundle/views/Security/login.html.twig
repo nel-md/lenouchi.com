@@ -1,0 +1,104 @@
+{% extends "::base_fos_user.html.twig" %}
+
+{% block meta %}
+	{{parent()}}
+	<meta name="google-signin-client_id" content="7636852013-7dolt2v6pli199a3sbv4o462brs67ajs.apps.googleusercontent.com">
+{% endblock %}
+
+{% block fos_user_content %}
+    {{ include('@FOSUser/Security/login_content.html.twig') }}
+{% endblock fos_user_content %}
+
+{% block javascripts %}
+	{{ parent() }}
+
+	<script src="https://apis.google.com/js/api:client.js"></script>
+	<script>
+	  	
+	</script>
+	<script type="text/javascript">
+
+		function loading()
+		{
+			$("#loading").removeClass("hide");
+			$("#account-btn").addClass("hide");
+			$("#connexion_title").html("Connexion en cours");
+		}
+
+		/** 
+		* Connect
+		**/
+		function connect(data){
+
+			var form = $('form[name="fos_user_registration_form"');
+          	
+          	$.ajax( {
+		      	type: "POST",
+		     	url: "{{url('security_connect')}}",
+		      	data: data,
+		      	success: function(response) {
+          			window.location.assign(response.target);
+		      	}
+		    } );
+		}
+
+        /**
+        * Sign in with Facebook
+        **/
+		$("#fb-login").click(function(e){
+			e.preventDefault();
+			loading();
+
+			$.ajaxSetup({ cache: true });
+			$.getScript('//connect.facebook.net/en_US/sdk.js', function(){
+			    FB.init({
+			    	appId: '1955630587795449',
+			      	version: 'v2.10'
+			    });
+			    FB.login(function(){
+				    FB.api('/me', 
+				        {fields: "id,name,email"}, 
+				        function(response) {
+				        	connect({email : response.email});
+				        }
+				    );
+				}, {scope: 'email'}); 
+				
+		  	});
+		});
+
+
+		/**
+        * Sign in with Google
+        **/
+	    var googleUser = {};
+	  	var startApp = function() {
+	    	gapi.load('auth2', function(){
+	      		auth2 = gapi.auth2.init({
+	        		client_id: '7636852013-7dolt2v6pli199a3sbv4o462brs67ajs.apps.googleusercontent.com'
+	      		});
+	      		attachSignin(document.getElementById('customBtn'));
+	    	});
+	    	
+	  	};
+
+	  	function attachSignin(element) {
+		    auth2.attachClickHandler(element, {},
+		        function(googleUser) {
+
+		        	loading();
+
+		        	var data = {
+		        		email : googleUser.getBasicProfile().getEmail(), 
+		        		name: googleUser.getBasicProfile().getName()
+		        	}
+		          	connect(data);
+		        }, function(error) {}
+		    );
+	  	}
+
+	  	startApp();
+
+	</script>
+
+{% endblock %}

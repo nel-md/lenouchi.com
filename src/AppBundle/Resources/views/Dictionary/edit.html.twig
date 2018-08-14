@@ -1,0 +1,56 @@
+{% extends 'AppBundle::layout.html.twig' %}
+{% block title %} | Modifier {{ entry.word }}{% endblock %}
+{% block stylesheets %}
+	{{ parent() }}
+	<!-- Include external CSS. -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
+ 
+{% endblock %}
+{% block container %}
+	<div class="container">
+		<div class="row">
+			<div id="content" class="col-xs-8 col-xs-offset-2">
+				<h3 class="text-center"><b>Modifier {{ entry.word }}</b></h3>
+				<hr/>
+				{{ form_start(form) }}
+				{{ form_errors(form) }}
+				<div class="control-group">
+			      	<div class="controls">
+				   		<label>Mot:</label>
+				   		{{ form_widget(form.word) }}
+				  	</div>
+				</div>
+				<div class="control-group">
+			      	<div class="controls" style="margin-bottom:20px;">
+				   		<label>Definition:</label>
+				   		{{ form_widget(form.definition) }}
+				  	</div>
+				</div>
+				<div class="control-group">
+			      	<div class="controls" style="margin-bottom:20px;">
+				   		<label>Exemple:</label>
+				   		{{ form_widget(form.example) }}
+				  	</div>
+				</div>
+				<div class="control-group text-center">
+			      	<div class="controls" style="margin-bottom:20px;">
+			      		<a href="{{url('app_user_dictionary_list')}}" class="btn btn-default">Retour</a>
+				   		{{ form_widget(form.modifier) }}
+				  	</div>
+				 </div>
+				{{ form_end(form) }}
+							
+			 </div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent()}}
+	<script src="{{ asset('libs/ckeditor/ckeditor.js') }}"></script>
+	<script src="{{ asset('libs/ckeditor/adapters/jquery.js') }}"></script>
+    <script> 
+    	$( 'textarea' ).ckeditor();
+    </script>
+{% endblock %}

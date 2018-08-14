@@ -1,0 +1,60 @@
+{% extends 'AppBundle::layout.html.twig' %}
+{% block title %} | Ma liste de mots {% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('libs/DataTables/media/css/jquery.dataTables.min.css') }}" />
+{% endblock %}
+{% block container %}
+	<div class="container" style="margin-top:15px">
+	 	<div class="row">
+	  		<div class="col-md-8 col-md-offset-2 col-xs-12">
+	  			<h3>Ma liste de mots</h3>
+	  			<hr/>
+				<div class="well well-lg">
+					<table id="myTable" class="table">
+					  	<thead class="thead-default">
+					    	<tr>
+					      		<th>#</th>
+						      	<th class="text-left">Mot</th>
+						      	<th class="text-center">Vote Up</th>
+						      	<th class="text-center">Vote Down</th>
+						      	<th></th>
+					    	</tr>
+					  	</thead>
+
+					  	<tbody>
+					  	{% for entry in list %}
+					  		<tr>
+						    	<th scope="row">{{ entry.id }}</th>
+						      	<td class="text-left"><a href="{{ url('app_dictionary_entry', {'id':entry.id})}}">{{ entry.word }}</a></td>
+						      	<td class="text-center">{{entry.voteUps|length|default("0")}}</td>
+						      	<td class="text-center">{{entry.voteDowns|length|default("0")}}</td>
+						      	<th class="text-right">
+						      		<a href="{{url('app_user_dictionary_edit', {'id': entry.id})}}" title="Modifier" alt="Modifier"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+						      		<a href="{{url('app_user_dictionary_delete', {'id': entry.id})}}" title="Supprimer" alt="Supprimer"><i class="fa fa-trash" aria-hidden="true"></i></a>
+						      	</th>
+						    </tr>
+						{% endfor %}
+					    	
+					  	</tbody>
+					</table>
+				</div>
+	  		</div>
+	 	</div>
+	</div>
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript" src="{{ asset('libs/DataTables/media/js/jquery.dataTables.min.js') }}"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+	    $('#myTable').dataTable( {
+	    	responsive: true,
+            "language": {
+                "url": "libs/DataTables/media/lang/dataTables.french.lang"
+            }
+        } )
+	});
+	</script>
+{% endblock %}
